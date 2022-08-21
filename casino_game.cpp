@@ -1,37 +1,37 @@
 // Casino game
 #include<bits/stdc++.h>
+using namespace std;
 
-int main()
-{
-	char name[50];
-	char s[4];
-	srand(time(0));
-	
+void start(){
+        for(int i=0;i<50;i++){
+	    	printf("_");
+	    }
+	    printf("\n\n");
+	    for(int i=0;i<15;i++)
+	    {
+	    	printf(" ");
+	    }
+	    printf("Casino Game\n\n");
+        for(int i=0;i<50;i++)
+	    {
+	    	printf("_");
+	    }
+    }
+
+class casino{
+    string name;
 	int a,dep_amt,bet_amt,num;
-	
-	
-	for(int i=0;i<50;i++)
-	{
-		printf("_");
-	}
-	printf("\n\n");
-	for(int i=0;i<15;i++)
-	{
-		printf(" ");
-	}
-	printf("Casino Game\n\n");
-    for(int i=0;i<50;i++)
-	{
-		printf("_");
-	}
-	printf("\nEnter your name:");
-	scanf("%s", name);
-	printf("\nEnter deposit amount to play game: $");
-	scanf("%d", &dep_amt);
-	while(1)
-	{
-		a=rand()%10+1;
-		for(int i=0;i<50;i++)
+
+    public:
+    casino(){
+        cout<<"\nEnter your name:";
+	    cin>>name;
+	    cout<<"\nEnter deposit amount to play game: $";
+	    cin>>dep_amt;
+    }
+
+    void rules(){
+        for(int i=0;i<50;i++)
     	{
 	    	printf("-");
 	    }
@@ -52,26 +52,48 @@ int main()
     	{
 	    	printf("_");
 	    }
-		printf("\nYour current balance is $ %d \n%s, Enter money to bet: $ ", dep_amt, name);
-		scanf("%d", &bet_amt);
-		printf("\nGuess your number to bet between 1 to 10: ");
-		scanf("%d", &num);
+    }
+
+    void game(){
+        a=rand()%10+1;
+        cout<<"\nYour current balance is $ "<<dep_amt<<"\n"<<name<<", Enter money to bet: $ ";
+		cin>>bet_amt;
+		cout<<"\nGuess your number to bet between 1 to 10: ";
+		cin>>num;
 		if(num==a)
 		{
-			printf("\nCongratulations! You won $ %d", 10*bet_amt);
+			cout<<"\nCongratulations! You won $ "<<10*bet_amt;
 			dep_amt = dep_amt + (9*bet_amt);
 		}
 		else
 		{
-			printf("\nBad luck this time!! You lost $ %d", bet_amt);
-			printf("\nThe winning number was: %d\n", a);
+			cout<<"\nBad luck this time!! You lost $ "<<bet_amt;
+			cout<<"\nThe winning number was: "<<a<<endl;
 			dep_amt=dep_amt-bet_amt;
 		}
-		printf("\n%s, You have $ %d", name, dep_amt);
-		printf("\n-->Do you want to play again (y/n)?\n\n");
-	    
-	 	scanf("%s", s);
-		if(!strcmp(s,"n"))
+    }
+
+    void display_bal(){
+        cout<<"\n"<<name<<", You have $ "<<dep_amt<<endl;
+    }
+    
+};
+
+int main()
+{	
+    srand(time(0));
+    start();
+	casino c;
+	
+	while(1)
+	{
+		c.rules();
+	    c.game();
+		c.display_bal();
+		cout<<"\n-->Do you want to play again (y/n)?\n\n";
+	    string s;
+	 	cin>>s;
+		if(s=="n")
 		{
 			break;
 		}
